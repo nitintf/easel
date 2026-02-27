@@ -1,10 +1,19 @@
-# Chalk
+# Pigment
 
-A design canvas application built with Tauri v2, React 19, and Fabric.js. Think Figma, but as a native desktop app.
+An AI-native design studio. Design on a canvas with multiple AI agents working alongside you — like Figma meets a team of AI designers, running natively on your desktop.
 
-## What is Chalk?
+![Pigment — AI-native design studio](docs/main-screen.png)
 
-Chalk is an open-source design tool that runs natively on your desktop. It provides a canvas-based editor for creating and editing vector graphics, frames, text, and components — with an integrated AI chat assistant for design help.
+## What is Pigment?
+
+Pigment is an open-source design studio powered by multiple AI agents. It combines a full-featured vector canvas with an AI-driven workflow where parallel agents can generate, iterate, and refine designs with you in real time. Built as a native desktop app for speed and privacy.
+
+## Why Pigment?
+
+- **AI-first design** — Multiple AI agents work in parallel to help you design faster
+- **Native performance** — Built with Tauri, runs locally on your machine
+- **Studio workflow** — A professional canvas with layers, components, frames, and export — not a toy
+- **Open source** — Extend it, self-host it, make it yours
 
 ## Tech Stack
 
@@ -18,6 +27,14 @@ Chalk is an open-source design tool that runs natively on your desktop. It provi
 - **cmdk** — Command palette
 
 ## Features
+
+### AI Studio
+
+- Multiple AI agents (1-5) working in parallel with live status indicators
+- Model selection (Claude Sonnet, Opus, Haiku)
+- Per-tab AI sessions — each canvas gets its own conversation context
+- File attachments for context-aware design assistance
+- Floating chat widget with collapsible mini-bar
 
 ### Canvas & Drawing
 
@@ -60,17 +77,7 @@ Chalk is an open-source design tool that runs natively on your desktop. It provi
 
 - Multiple canvas tabs with independent state
 - Per-tab canvas serialization and restore
-- Per-tab chat sessions
-
-### AI Chat
-
-- Floating chat widget at bottom-right corner
-- Collapsible mini-bar showing agent status when minimized
-- Model selector (Claude Sonnet, Opus, Haiku)
-- Parallel agents (1-5) with status indicators
-- File attachments
-- New chat button to clear conversation
-- Per-tab chat sessions
+- Per-tab AI chat sessions
 
 ### UI
 
@@ -124,9 +131,11 @@ pnpm lint
 | ]                | Bring to front          |
 | [                | Send to back            |
 
-## What's Being Built
+## Roadmap
 
-- [ ] Real AI backend integration (currently placeholder responses)
+- [ ] AI agent backend integration (currently placeholder responses)
+- [ ] AI-driven design generation directly on canvas
+- [ ] Multi-agent orchestration — agents for layout, color, typography, content
 - [ ] Persistent storage via Tauri/Rust IPC
 - [ ] Component instances and overrides
 - [ ] Auto-layout / flex containers
@@ -143,13 +152,13 @@ pnpm lint
 ```
 src/
   features/
-    studio/           # Canvas, toolbar, layers, properties
+    studio/           # Design canvas, toolbar, layers, properties
       components/
       hooks/
       store/
       types/
       utils/
-    chat/             # AI chat panel
+    chat/             # AI agents and chat
       components/
       store/
       types/

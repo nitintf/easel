@@ -1,12 +1,12 @@
 [package]
-name = "chalk"
+name = "pigment"
 version = "0.1.0"
-description = "Chalk — AI-powered collaborative design canvas"
+description = "Pigment — AI-powered collaborative design canvas"
 authors = ["you"]
 edition = "2021"
 
 [lib]
-name = "chalk_lib"
+name = "pigment_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
