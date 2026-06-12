@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -15,7 +15,9 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@easel/editor-core": ["./packages/editor-core/src/index.ts"],
+      "@easel/editor-core/*": ["./packages/editor-core/src/*"]
     },
 
     /* Linting */
@@ -24,6 +26,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "packages/editor-core/src/globals.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

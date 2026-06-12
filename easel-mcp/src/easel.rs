@@ -11,8 +11,33 @@ pub struct EaselFile {
     pub name: String,
     pub canvas: Value,
     pub viewport: ViewportState,
+    #[serde(default)]
+    pub theme: Option<ThemeData>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ThemeData {
+    pub modes: Vec<ThemeMode>,
+    pub tokens: Vec<DesignToken>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ThemeMode {
+    pub id: String,
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DesignToken {
+    pub name: String,
+    #[serde(rename = "type")]
+    pub token_type: String,
+    pub values: std::collections::HashMap<String, String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -33,6 +58,7 @@ impl EaselFile {
                 zoom: 1.0,
                 transform: vec![1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
             },
+            theme: None,
             created_at: now,
             updated_at: now,
         }

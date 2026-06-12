@@ -1,0 +1,5 @@
+export { EditorView } from './components/editor-view'
+export { EditorCanvas } from './components/editor-canvas'
+export { EditorToolbar } from './components/editor-toolbar'
+export { useEditorStore, getGraph, getRenderer, getTextEditor, getUndoManager } from './store/editor-store'
+export type { Tool, ToolDef, HandlePosition, DragState } from './types'

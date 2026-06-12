@@ -13,6 +13,7 @@ export interface CanvasState {
   canvasJson: string;
   zoom: number;
   viewportTransform: string;
+  themeJson?: string | null;
   updatedAt: string;
 }
 
@@ -45,11 +46,17 @@ export function saveCanvasState(
   canvasJson: string,
   zoom: number,
   viewportTransform: string,
+  themeJson?: string | null,
 ): Promise<void> {
   return invoke("save_canvas_state", {
     canvasId,
     canvasJson,
     zoom,
     viewportTransform,
+    themeJson: themeJson ?? null,
   });
+}
+
+export function saveThumbnail(canvasId: string, dataUrl: string): Promise<void> {
+  return invoke("save_canvas_thumbnail", { canvasId, dataUrl });
 }

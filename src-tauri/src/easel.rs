@@ -11,6 +11,8 @@ pub struct EaselFile {
     pub name: String,
     pub canvas: Value,
     pub viewport: ViewportState,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub theme: Option<Value>,
     pub created_at: String,
     pub updated_at: String,
 }
@@ -33,6 +35,7 @@ impl EaselFile {
                 zoom: 1.0,
                 transform: vec![1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
             },
+            theme: None,
             created_at: now.clone(),
             updated_at: now,
         }
@@ -199,6 +202,7 @@ pub fn migrate_canvas_states_to_files(conn: &Connection, app_data_dir: &Path) {
             name,
             canvas,
             viewport: ViewportState { zoom, transform },
+            theme: None,
             created_at,
             updated_at,
         };

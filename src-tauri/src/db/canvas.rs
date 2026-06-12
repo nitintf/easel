@@ -19,6 +19,7 @@ pub struct CanvasState {
     pub canvas_json: String,
     pub zoom: f64,
     pub viewport_transform: String,
+    pub theme_json: Option<String>,
     pub updated_at: String,
 }
 

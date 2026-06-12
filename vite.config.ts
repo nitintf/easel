@@ -1,13 +1,31 @@
+import fs from "node:fs";
 import path from "node:path";
 
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
+
+function copyCanvasKitWasm(): Plugin {
+  return {
+    name: "copy-canvaskit-wasm",
+    buildStart() {
+      const src = path.resolve(
+        __dirname,
+        "packages/editor-core/node_modules/canvaskit-wasm/bin/canvaskit.wasm",
+      );
+      const dest = path.resolve(__dirname, "public/canvaskit.wasm");
+      if (fs.existsSync(src) && !fs.existsSync(dest)) {
+        fs.mkdirSync(path.dirname(dest), { recursive: true });
+        fs.copyFileSync(src, dest);
+      }
+    },
+  };
+}
 
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig({
-  plugins: [tailwindcss(), react()],
+  plugins: [tailwindcss(), react(), copyCanvasKitWasm()],
 
   resolve: {
     alias: {
@@ -18,8 +36,14 @@ export default defineConfig({
   build: {
     rollupOptions: {
       // westures is an optional peer dep of fabric/extensions — not installed, not needed
-      external: ["westures"],
+      // esbuild is only used in render-jsx.ts for Node/CLI — not available in browser
+      external: ["westures", "esbuild"],
     },
+  },
+
+  optimizeDeps: {
+    include: ["canvaskit-wasm", "yoga-layout"],
+    exclude: ["esbuild"],
   },
 
   clearScreen: false,

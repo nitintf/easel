@@ -1,0 +1,27 @@
+{
+  "name": "@easel/editor-core",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": ["src"],
+  "dependencies": {
+    "canvaskit-wasm": "^0.40.0",
+    "culori": "^4.0.2",
+    "fflate": "^0.8.2",
+    "fzstd": "^0.1.1",
+    "yoga-layout": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/culori": "^4.0.1",
+    "typescript": "~5.8.3"
+  }
+}

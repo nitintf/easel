@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useChatStore } from "@/features/chat/store/chat-store";
-import { useStudioStore } from "@/features/studio/store/studio-store";
-import { useTabStore } from "@/features/studio/store/tab-store";
+import { useEditorStore } from "@/features/editor/store/editor-store";
 import { getPreference } from "@/lib/api/preferences";
 
 export function useAppInit(): boolean {
@@ -11,19 +10,16 @@ export function useAppInit(): boolean {
   useEffect(() => {
     async function init() {
       // Restore UI preferences
-      const leftSidebarOpen = await getPreference("leftSidebarOpen", false);
-      const rightPanelOpen = await getPreference("rightPanelOpen", false);
+      const leftSidebarOpen = await getPreference("leftSidebarOpen", true);
+      const rightPanelOpen = await getPreference("rightPanelOpen", true);
 
-      const studioActions = useStudioStore.getState().actions;
-      if (leftSidebarOpen) studioActions.toggleLeftSidebar();
-      if (rightPanelOpen) studioActions.toggleRightPanel();
+      useEditorStore.setState({
+        showUI: leftSidebarOpen,
+        showRightPanel: rightPanelOpen,
+      });
 
       // Initialize chat preferences (model, agent count)
       await useChatStore.getState().actions.initializePreferences();
-
-      // Load canvases from SQLite
-      const lastActiveId = await getPreference<string>("lastActiveCanvasId", "");
-      await useTabStore.getState().actions.initialize(lastActiveId || undefined);
 
       setReady(true);
     }

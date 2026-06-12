@@ -5,6 +5,9 @@ dist
 .env.*
 !.env.example
 
+# CanvasKit WASM (copied at build time)
+public/canvaskit.wasm
+
 # Tauri
 src-tauri/target
 src-tauri/gen

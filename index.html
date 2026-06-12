@@ -5,8 +5,77 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Easel</title>
+    <style>
+      /* Prevent white flash — dark background immediately */
+      html, body { margin: 0; padding: 0; background: #1a1a1a; overflow: hidden; }
+      #root { min-height: 100vh; }
+
+      /* Splash screen styles */
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #1a1a1a;
+        transition: opacity 0.3s ease;
+      }
+      #splash.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #splash svg {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 28px;
+        opacity: 0.9;
+      }
+      #splash-bar {
+        width: 200px;
+        height: 3px;
+        border-radius: 2px;
+        background: #2a2a2a;
+        overflow: hidden;
+        position: relative;
+      }
+      #splash-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -40%;
+        width: 40%;
+        height: 100%;
+        border-radius: 2px;
+        background: linear-gradient(90deg, transparent, #a855f7, transparent);
+        animation: splash-slide 1.2s ease-in-out infinite;
+      }
+      @keyframes splash-slide {
+        0% { left: -40%; }
+        100% { left: 100%; }
+      }
+      #splash-text {
+        margin-top: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11px;
+        color: #555;
+        letter-spacing: 0.02em;
+      }
+    </style>
   </head>
   <body>
+    <!-- Splash screen shown immediately before React loads -->
+    <div id="splash">
+      <!-- Easel logo — pen nib / design tool icon -->
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="28" height="28" rx="7" fill="#a855f7" opacity="0.15"/>
+        <path d="M10 22L22 10M22 10H15M22 10V17" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="2" y="2" width="28" height="28" rx="7" stroke="#a855f7" stroke-width="1.5" opacity="0.3"/>
+      </svg>
+      <div id="splash-bar"></div>
+      <div id="splash-text">Loading Easel</div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/Main.tsx"></script>
   </body>
